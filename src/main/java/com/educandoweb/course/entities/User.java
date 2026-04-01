@@ -18,6 +18,10 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
+    // Iniciar aplicação sem consrutor vazio resulta em erro status 500 (Internal Server Error).
+    public User() {
+    }
+
     public User(Long id, String name, String email, String phone, String password) {
         this.id = id;
         this.name = name;
