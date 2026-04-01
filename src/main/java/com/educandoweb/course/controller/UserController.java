@@ -1,24 +1,25 @@
 package com.educandoweb.course.controller;
 
 import com.educandoweb.course.entities.User;
+import com.educandoweb.course.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class UserController {
 
-    @GetMapping("/home")
-    public ResponseEntity<User> getUser() {
+    @Autowired
+    private UserService service;
 
-        User user = new User(
-                1L,
-                "João",
-                "joao@email.com",
-                "61 99999-9999",
-                "@Dm1n"
-        );
+    @GetMapping(value = "/home")
+    public ResponseEntity<List<User>> getUser() {
 
-        return ResponseEntity.ok().body(user);
+        List<User> list = service.findAll();
+
+        return ResponseEntity.ok().body(list);
     }
 }
